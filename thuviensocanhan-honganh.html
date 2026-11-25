@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thư viện số cá nhân – CNTT 4.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- CHỈNH NHANH: dữ liệu nằm ở đầu khối <script>. THONG_TIN = họ tên/MSSV/lớp · LESSONS = 8 bài (docs, images, refs, note) · VIDEOS: baiHoc = số bài (1–8) để video hiện trong bài đó, để null thì hiện ở phần chung. Thông tin ở tiêu đề và ghi chú sửa ngay trên web (lưu trong trình duyệt). -->
+<style>
+:root{--bg:#f1f5f9;--card:#fff;--bd:#e2e8f0;--pr:#2563eb;--soft:#eff6ff;--mu:#f1f5f9;--mut:#64748b;--ink:#0f172a;--r:12px;--sh:0 1px 2px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.05)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:"Be Vietnam Pro",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+:focus-visible{outline:3px solid var(--pr);outline-offset:2px}button,input,textarea{font:inherit}
+.app{min-height:100vh;display:flex;flex-direction:column}.wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 24px}
+.hero{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;padding:28px 0;box-shadow:0 8px 24px rgba(37,99,235,.28)}
+.hrow{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-start}
+.pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.2);border-radius:99px;padding:4px 12px;font-size:.78rem;font-weight:600;margin-bottom:8px}
+.hero h1{margin:0 0 10px;font-size:1.9rem;letter-spacing:-.02em;line-height:1.25}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.92rem;color:rgba(255,255,255,.88)}.meta strong{color:#fff}
+.hbtn{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.15);color:#fff;border-radius:10px;padding:8px 14px;font-weight:600;font-size:.88rem;cursor:pointer}.hbtn:hover{background:rgba(255,255,255,.25)}
+.edit{margin-top:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:var(--r);padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end}
+.edit[hidden]{display:none}.edit label{font-size:.78rem;font-weight:600;display:grid;gap:4px}.edit input{border:0;border-radius:8px;padding:8px 10px;color:var(--ink)}
+.sbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:20px}
+.sbar label{position:relative;flex:1 1 300px}.sbar svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--mut)}
+.sbar input{width:100%;border:1px solid var(--bd);border-radius:10px;background:var(--card);padding:10px 16px 10px 40px;color:var(--ink)}.sbar input:focus{border-color:var(--pr);outline:0}
+.sbar p{margin:0;font-size:.88rem;color:rgba(255,255,255,.88)}
+main{display:grid;gap:24px;align-items:start;padding-top:20px;padding-bottom:48px;flex:1;grid-template-columns:minmax(0,1fr)}
+@media(min-width:768px){main{grid-template-columns:280px minmax(0,1fr)}aside{position:sticky;top:16px}}
+aside,.card{background:var(--card);border:1px solid var(--bd);border-radius:var(--r);box-shadow:var(--sh)}aside{padding:12px}
+.sl{margin:0;padding:6px 10px 10px;font-size:.78rem;font-weight:700;color:var(--mut)}
+nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+nav a{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border-radius:8px;font-size:.88rem;color:var(--ink);text-decoration:none}
+nav a:hover{background:var(--mu)}nav a.on{background:var(--soft);color:var(--pr);font-weight:600}
+nav a b{flex:none;margin-top:2px;border-radius:6px;padding:1px 7px;font-size:.74rem;background:var(--mu);color:var(--mut);white-space:nowrap}nav a.on b{background:var(--pr);color:#fff}
+.card{padding:28px;min-width:0}@media(max-width:600px){.card{padding:18px}.wrap{padding:0 16px}}
+.ch{margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--bd)}
+.bdg{display:inline-block;margin-bottom:8px;border-radius:6px;background:var(--soft);color:var(--pr);padding:3px 10px;font-size:.78rem;font-weight:700}
+h2{margin:0;font-size:1.5rem;line-height:1.35}h3{margin:0 0 10px;font-size:1.1rem}h4{margin:18px 0 8px}
+.call{margin-bottom:24px;border-left:4px solid var(--pr);background:var(--soft);padding:14px 16px;border-radius:0 8px 8px 0;font-size:.95rem}
+.four{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:24px}
+.box{border:1px solid var(--bd);background:var(--mu);border-radius:8px;padding:12px 14px}.box strong{display:block;font-size:.9rem;margin-bottom:4px}.box span{font-size:.86rem;color:var(--mut)}
+pre{margin:0 0 28px;overflow-x:auto;background:#0f172a;color:#e2e8f0;border-radius:8px;padding:14px 16px;font:.84rem/1.7 "JetBrains Mono",ui-monospace,monospace}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:.9rem}
+th{background:var(--mu);text-align:left;padding:12px 14px;border-bottom:1px solid var(--bd)}td{padding:12px 14px;border-bottom:1px solid var(--bd)}
+tbody tr{cursor:pointer}tbody tr:hover,tbody tr:focus{background:var(--soft);outline:0}.w{width:80px;font-weight:700}
+.mono{display:inline-block;background:var(--mu);color:var(--mut);border-radius:6px;padding:2px 8px;font:.8rem "JetBrains Mono",monospace;word-break:break-all}
+.tp{display:flex;gap:6px;flex-wrap:wrap;list-style:none;padding:0;margin:14px 0 0}.tp li{background:var(--soft);color:#1e40af;padding:3px 11px;border-radius:8px;font-size:.82rem}
+.blk{margin-top:26px}.blk h3{display:flex;gap:10px;align-items:center}.k{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--pr);color:#fff;font-size:.85rem}
+.row{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding:12px 14px;border:1px solid var(--bd);border-radius:10px;margin-bottom:10px}
+.row small{display:block;color:var(--mut)}.acts{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;gap:6px;align-items:center;border:0;cursor:pointer;font-weight:600;font-size:.86rem;text-decoration:none;padding:9px 16px;border-radius:10px;background:var(--pr);color:#fff}.btn:hover{filter:brightness(1.1)}
+.btn.g{background:#fff;color:#1e3a8a;border:1px solid var(--bd)}
+.media{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}.media figure{margin:0}
+.media img,.vid{width:100%;aspect-ratio:16/9;border-radius:10px;border:1px solid var(--bd);object-fit:cover;display:block;cursor:zoom-in}.vid{border:0;background:#000;cursor:auto}
+figcaption{font-size:.84rem;color:var(--mut);margin-top:6px}.lk{word-break:break-all;font-size:.76rem}
+.empty{padding:14px 16px;border:1px dashed #cbd5e1;border-radius:10px;color:var(--mut);background:#fff;font-size:.9rem}
+textarea{width:100%;min-height:150px;padding:12px;border:1px solid var(--bd);border-radius:10px;resize:vertical}.hint{font-size:.82rem;color:var(--mut)}
+.pn{display:flex;justify-content:space-between;gap:10px;margin-top:28px;padding-top:18px;border-top:1px solid var(--bd);flex-wrap:wrap}
+footer{border-top:1px solid var(--bd);background:var(--card);padding:20px;text-align:center;font-size:.86rem;color:var(--mut)}
+#modal{position:fixed;inset:0;background:rgba(8,14,32,.86);display:none;z-index:50;padding:20px;align-items:center;justify-content:center;flex-direction:column;gap:12px}#modal.on{display:flex}
+#mb{width:min(1000px,100%);height:min(82vh,100%);display:flex}#mb iframe,#mb img{width:100%;height:100%;border:0;background:#fff;border-radius:12px;object-fit:contain}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#1e3a8a;color:#fff;padding:10px 20px;border-radius:10px;display:none;z-index:60}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body><div class="app">
+<header class="hero"><div class="wrap"><div class="hrow"><div>
+<div class="pill">📚 Cao đẳng FPT Polytechnic · Bài tập Phần 1</div>
+<h1>Thư viện số cá nhân – môn CNTT 4.0</h1><div class="meta" id="meta"></div></div>
+<button type="button" class="hbtn" id="editBtn" aria-expanded="false" aria-controls="editBox">✎ Chỉnh sửa thông tin</button></div>
+<div class="edit" id="editBox" hidden>
+<label>Họ và tên<input id="f-ten"></label><label>MSSV<input id="f-mssv"></label><label>Lớp<input id="f-lop"></label><label>Môn học<input id="f-mon"></label><label>Ngày<input id="f-ngay"></label>
+<button type="button" class="btn g" id="saveInfo">Lưu thông tin</button></div>
+<div class="sbar"><label><span style="position:absolute;left:-9999px">Tìm kiếm bài học</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg><input type="search" id="q" placeholder="Tìm bài học, chủ đề, ghi chú (VD: Docker, Deepfake, 6G, IoT, Luật)..."></label><p id="kq" aria-live="polite"></p></div>
+</div></header>
+<main class="wrap"><aside><p class="sl">Danh mục điều hướng</p><nav><ul id="nav"></ul></nav></aside><section class="card" id="ct"></section></main>
+<footer>Thư viện số cá nhân – CNTT 4.0 · Cao đẳng FPT Polytechnic · <span id="ft"></span><br>Nội dung bài học lấy từ slide gốc của môn học; ghi chú là của cá nhân sinh viên.</footer>
+</div>
+<div id="modal" role="dialog" aria-modal="true" aria-label="Xem nội dung"><div id="mb"></div><button type="button" class="btn g" id="mClose">Đóng</button></div>
+<div id="toast" role="status"></div>
+<script>
+/* ===== 1. THÔNG TIN SINH VIÊN ===== */
+const THONG_TIN = { hoTen:"Y Hồng Anh Niê", mssv:"PK04793", lop:"AI22301" };
+/* ===== 2. 8 BÀI HỌC – sửa tiêu đề, mô tả, tài liệu, hình ảnh, liên kết, ghi chú tại đây =====
+   docs  : { ten, file:"documents/ten-tep.pdf", loai:"pdf" | "word" | "pptx" | "khac", mota }
+   images: { ten, file:"images/ten-anh.png" }
+   refs  : { ten, url:"https://...", mota }
+   note  : ghi chú mặc định (người dùng vẫn sửa được trên web)                                   */
+const LESSONS = [
+ { id:1, tieuDe:"Tổng quan về CMCN 4.0, CNTT 4.0 và Chuyển đổi số (CĐS)",
+   moTa:"Khái niệm CMCN 4.0 và CNTT 4.0, lịch sử các cuộc cách mạng công nghiệp, công nghệ cốt lõi, chuyển đổi số, cơ hội nghề nghiệp và kỹ năng cần thiết của sinh viên CNTT.",
+   topics:["Khái niệm CMCN 4.0 và CNTT 4.0","Lịch sử các cuộc cách mạng công nghiệp","Công nghệ cốt lõi của thời đại 4.0","Chuyển đổi số (CĐS)","Cơ hội nghề nghiệp trong CNTT","Kỹ năng cần thiết cho sinh viên CNTT"],
+   docs:[{ten:"Slide 1 - Tổng quan về CMCN 4.0, CNTT 4.0, CĐS",file:"documents/bai-01-tong-quan-cmcn-cntt-cds.pptx",loai:"pptx",mota:"Slide gốc của bài học"}], images:[], refs:[{ten:"Chuyển đổi số là gì? (VnExpress)",url:"https://vnexpress.net/chuyen-doi-so-la-gi-3921707.html",mota:"Bài viết giải thích khái niệm chuyển đổi số"}], note:"" },
+ { id:2, tieuDe:"Kiến trúc và phần cứng máy tính",
+   moTa:"Lịch sử phát triển và phân loại máy tính, các thành phần phần cứng, CPU, bộ nhớ, thiết bị lưu trữ, thiết bị ngoại vi và xu hướng phát triển công nghệ máy tính.",
+   topics:["Lịch sử phát triển của máy tính","Phân loại máy tính","Các thành phần phần cứng","CPU","Bộ nhớ","Thiết bị lưu trữ","Thiết bị ngoại vi","Xu hướng phát triển công nghệ máy tính"],
+   docs:[{ten:"Slide 2 - Computer, Hardware",file:"documents/bai-02-kien-truc-phan-cung-may-tinh.pptx",loai:"pptx",mota:"Slide gốc của bài học"}], images:[], refs:[], note:"" },
+ { id:3, tieuDe:"Hệ điều hành và Môi trường số đa nền tảng",
+   moTa:"Tổng quan về hệ điều hành (Operating System), hệ điều hành phổ biến, cài đặt và sử dụng hiệu quả, hệ sinh thái hợp nhất, ảo hóa – container (Docker) và hệ điều hành tích hợp AI.",
+   topics:["Hệ điều hành – Operating System (OS)","Sử dụng hệ điều hành hiệu quả","Hệ sinh thái hợp nhất (Unified Ecosystem)","Ảo hóa và Containerization (Docker)","Hệ điều hành tích hợp AI"],
+   docs:[{ten:"Slide 3 - Operating System",file:"documents/bai-03-he-dieu-hanh.pptx",loai:"pptx",mota:"Slide gốc của bài học"}], images:[], refs:[], note:"" },
+ { id:4, tieuDe:"Phần mềm, Điện toán đám mây và Nền tảng",
+   moTa:"Khái niệm và phân loại phần mềm, cách tải – cài đặt – gỡ cài đặt phần mềm, điện toán đám mây (Cloud computing) và nền tảng (Platform).",
+   topics:["Phần mềm – Software","Điện toán đám mây – Cloud computing","Nền tảng – Platform","Cài đặt và gỡ cài đặt phần mềm","Dịch vụ cloud phổ biến"],
+   docs:[{ten:"Slide 4 - Software, Cloud, Platform",file:"documents/bai-04-phan-mem-dam-may-nen-tang.pptx",loai:"pptx",mota:"Slide gốc của bài học"}], images:[], refs:[{ten:"Điện toán đám mây là gì? (AWS)",url:"https://aws.amazon.com/vi/what-is-cloud-computing/",mota:"Giới thiệu về điện toán đám mây của AWS"}],
+   note:"Điện toán đám mây cho phép lưu trữ và truy cập dữ liệu thông qua Internet. Ví dụ: Google Drive và OneDrive. Em có thể sử dụng công nghệ này để lưu trữ tài liệu học tập và làm việc nhóm." },
+ { id:5, tieuDe:"Mạng trong kỷ nguyên số và Internet 4.0",
+   moTa:"Mạng máy tính và Internet, mạng không dây – mạng di động, mạng 6G và tầm nhìn tương lai, Internet vạn vật (IoT) và ý thức sử dụng Internet an toàn.",
+   topics:["Mạng máy tính","Mạng Internet","Mạng không dây, mạng di động","Mạng 6G và tầm nhìn tương lai","Internet vạn vật – IoT"],
+   docs:[{ten:"Slide 5 - Network, Internet, IOT",file:"documents/bai-05-mang-internet-iot.pptx",loai:"pptx",mota:"Slide gốc của bài học"}], images:[], refs:[],
+   note:"IoT là hệ thống các thiết bị kết nối Internet và trao đổi dữ liệu. Ví dụ: nhà thông minh, đồng hồ thông minh và hệ thống tưới cây tự động. Em hiểu rằng IoT giúp cuộc sống tiện lợi hơn nhưng cần chú ý bảo mật thiết bị." },
+ { id:6, tieuDe:"Tư duy lập trình và Tự động hóa",
+   moTa:"Tư duy lập trình (Computational thinking), tự động hóa trong lĩnh vực IT (BPA, RPA, IaC) và các xu hướng Low-code, No-code, Vibe-code.",
+   topics:["Tư duy lập trình","Tự động hóa trong lĩnh vực IT","Tự động hóa cấp doanh nghiệp (BPA)","Tự động hóa cấp ứng dụng (RPA)","Tự động hóa cấp hạ tầng (IaC)","Low-code, No-code, Vibe-code"],
+   docs:[{ten:"Slide 6 - Computational thinking, IT Automation",file:"documents/bai-06-tu-duy-lap-trinh-tu-dong-hoa.pptx",loai:"pptx",mota:"Slide gốc của bài học"}], images:[], refs:[], note:"" },
+ { id:7, tieuDe:"Trí tuệ nhân tạo, Dữ liệu và Ứng dụng trong công việc",
+   moTa:"Trí tuệ nhân tạo (AI) và những tác động, vai trò của dữ liệu, khái niệm Prompt và Prompt Engineering, các mô hình AI và ứng dụng trong học tập, công việc.",
+   topics:["Trí tuệ nhân tạo – Artificial Intelligence (AI)","AI và những tác động","Vai trò của dữ liệu","Prompt và Prompt Engineering","AI Models và ứng dụng"],
+   docs:[{ten:"Slide 7 - AI, Data in studying, working",file:"documents/bai-07-ai-du-lieu.pptx",loai:"pptx",mota:"Slide gốc của bài học"}], images:[], refs:[],
+   note:"AI giúp máy tính thực hiện những công việc cần khả năng phân tích và xử lý thông tin. AI được ứng dụng trong học tập, y tế, kinh doanh và đời sống. Em nhận thấy AI có thể hỗ trợ tìm kiếm thông tin và nâng cao hiệu quả học tập, nhưng cần kiểm tra độ chính xác của kết quả." },
+ { id:8, tieuDe:"An toàn thông tin và Đạo đức số",
+   moTa:"Khái niệm an toàn thông tin, hệ thống quản lý ATTT (ISMS) theo ISO 27000, các tiêu chuẩn ISO và TCVN, đạo đức số, vấn đề deepfake và một số luật của Việt Nam.",
+   topics:["An toàn thông tin","Tiêu chuẩn ISO và TCVN","Đạo đức số","Deepfake","Một vài luật của Việt Nam"],
+   docs:[{ten:"Slide 8 - An toàn thông tin và Đạo đức số",file:"documents/bai-08-an-toan-thong-tin-dao-duc-so.pptx",loai:"pptx",mota:"Slide gốc của bài học"}], images:[], refs:[{ten:"TCVN ISO/IEC 27001 – Hệ thống quản lý an toàn thông tin (Thư viện Pháp luật)",url:"https://thuvienphapluat.vn/TCVN/Dien-dien-tu/TCVN-ISO-IEC-27001-2009-Cong-nghe-thong-tin-He-thong-quan-ly-an-toan-908916.aspx",mota:"Tiêu chuẩn Việt Nam TCVN ISO/IEC 27001:2009"}],
+   note:"An toàn thông tin giúp bảo vệ dữ liệu và tài khoản cá nhân. Em cần sử dụng mật khẩu mạnh, bật xác thực hai yếu tố và tránh truy cập đường link đáng ngờ." }
+];
+
+/* ===== 3. HÌNH ẢNH CHUNG & VIDEO =====
+   Ảnh chung (không thuộc riêng bài nào) hiện ở Kho tài nguyên.
+   Video: đặt baiHoc: số bài (1–8) để video hiện trong bài đó; để null thì chỉ hiện ở Kho tài nguyên. */
+const ANH_CHUNG = [ { ten:"Ảnh nền chủ đề công nghệ số (ảnh minh họa chung)", file:"images/anhnen.png" } ];
+const VIDEOS = [
+ { ten:"Giải thích bộ nhớ RAM | Bộ nhớ RAM là gì ?", url:"https://www.youtube.com/watch?v=WIu7pDajon0&list=PLnRl-W3gZI7-8C32homKclwgG88p_Hyfy", baiHoc:null },
+ { ten:"Bộ nhớ đệm là gì? | Bộ nhớ Cache hoạt động như thế nào?", url:"https://www.youtube.com/watch?v=mmN8BQq3SJY&list=PLnRl-W3gZI7-8C32homKclwgG88p_Hyfy&index=2", baiHoc:null },
+ { ten:"Tên miền là gì? | Domain là gì? | DNS Server là gì?", url:"https://www.youtube.com/watch?v=FBF-xXX7nVM&list=PLnRl-W3gZI7-8C32homKclwgG88p_Hyfy&index=3", baiHoc:null },
+ { ten:"Giải thích về máy chủ | Máy chủ là gì? | Server là gì? | Web Server là gì?", url:"https://www.youtube.com/watch?v=R62fkqxz0b0&list=PLnRl-W3gZI7-8C32homKclwgG88p_Hyfy&index=4", baiHoc:null }
+];
+
+
+/* ===== MÃ NGUỒN ===== */
+const $=s=>document.querySelector(s),pad=n=>String(n).padStart(2,'0');
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const TYPE={pdf:'PDF',word:'Word',pptx:'PowerPoint',khac:'Tài liệu khác'};
+const ytId=u=>{const m=String(u).match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/);return m?m[1]:null};
+const vids=id=>VIDEOS.filter(v=>v.baiHoc===id);
+const note=l=>{try{const s=localStorage.getItem('cntt40_note_'+l.id);return s!==null?s:l.note}catch(e){return l.note}};
+const toast=t=>{const e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display='none',2200)};
+const E=t=>`<div class="empty">${t}</div>`;
+const slide=l=>l.docs.length?l.docs[0].file.split('/').pop():'';
+
+/* Thông tin sinh viên (sửa được trên web) */
+const IK='cntt40_info',F=['ten','mssv','lop','mon','ngay'];
+let info={ten:THONG_TIN.hoTen,mssv:THONG_TIN.mssv,lop:THONG_TIN.lop,mon:'CNTT 4.0',ngay:new Date().toLocaleDateString('vi-VN')};
+try{Object.assign(info,JSON.parse(localStorage.getItem(IK)||'{}'))}catch(e){}
+function renderInfo(){
+  const it=[['Sinh viên',info.ten],['MSSV',info.mssv],['Lớp',info.lop],['Môn học',info.mon],['Ngày',info.ngay]];
+  $('#meta').innerHTML=it.map(([k,v],i)=>(i?'<span aria-hidden="true">·</span>':'')+`<span>${k}: <strong>${esc(v)}</strong></span>`).join('');
+  $('#ft').textContent=info.ten+' · '+info.mssv+' · '+info.lop;
+}
+
+/* Khối nội dung dùng chung */
+const docRow=d=>{const f=esc(d.file),p=d.loai==='pdf';return `<div class="row"><div><b>${esc(d.ten)}</b><small>${TYPE[d.loai]||TYPE.khac}${d.mota?' · '+esc(d.mota):''}</small></div><div class="acts">${p?`<button type="button" class="btn" data-pdf="${f}">Xem tài liệu</button>`:''}<a class="btn ${p?'g':''}" href="${f}" download>⬇ Tải xuống</a></div></div>`};
+const imgFig=i=>`<figure><img src="${esc(i.file)}" alt="${esc(i.ten)}" data-img="${esc(i.file)}" loading="lazy"><figcaption>${esc(i.ten)}</figcaption></figure>`;
+const vidFig=v=>{const y=ytId(v.url);return y?`<figure><iframe class="vid" src="https://www.youtube-nocookie.com/embed/${y}" title="${esc(v.ten)}" loading="lazy" allowfullscreen></iframe><figcaption>${esc(v.ten)}<br><a class="lk" href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.url)}</a></figcaption></figure>`:''};
+const refRow=r=>`<div class="row"><div><b>${esc(r.ten)}</b>${r.mota?`<small>${esc(r.mota)}</small>`:''}</div><a class="btn" href="${esc(r.url)}" target="_blank" rel="noopener">Truy cập ↗</a></div>`;
+
+/* Trang Tổng quan & Mục lục */
+const FOUR=[['a) Tệp tin','Slide gốc (.pptx) và tài liệu PDF, Word đi kèm từng bài.'],['b) Hình ảnh / Video','Ảnh minh họa, sơ đồ và video nên xem lại.'],['c) Link tham chiếu','Website, bài viết, tiêu chuẩn và văn bản luật để đọc thêm.'],['d) Ghi chú cá nhân','Ý chính viết bằng lời của mình, gắn với thực tế.']];
+function overview(list){
+  const tree='📁 Thu-vien-so-ca-nhan/\n'+LESSONS.map((l,i)=>(i<LESSONS.length-1?'├── ':'└── ')+'📁 Bai-'+pad(l.id)+'/  →  Tep-tin · Hinh-Video · Link · Ghi-chu').join('\n');
+  const rows=list.length?list.map(l=>`<tr tabindex="0" role="link" data-go="${l.id}"><td class="w">Bài ${pad(l.id)}</td><td>${esc(l.tieuDe)}</td><td>${slide(l)?`<span class="mono">${esc(slide(l))}</span>`:'–'}</td></tr>`).join(''):`<tr><td colspan="3"><div class="empty">Không tìm thấy bài học phù hợp. Hãy thử từ khóa khác.</div></td></tr>`;
+  const sh=[...ANH_CHUNG.map(imgFig),...VIDEOS.filter(v=>!v.baiHoc).map(vidFig)];
+  return `<div class="ch"><span class="bdg">Tổng quan thư viện</span><h2>Cách tổ chức thư viện &amp; Mục lục ${LESSONS.length} bài học</h2></div>
+  <div class="call">Thư viện tập hợp tài liệu của <strong>${LESSONS.length} bài học</strong>: slide gốc, hình ảnh, video, nguồn tham khảo và ghi chú cá nhân, sắp xếp theo từng bài để dễ tra cứu và ôn tập. Mỗi bài có bốn mục: <strong>(a)</strong> tệp tin, <strong>(b)</strong> hình ảnh/video, <strong>(c)</strong> link tham chiếu, <strong>(d)</strong> ghi chú.</div>
+  <div class="four">${FOUR.map(([t,d])=>`<div class="box"><strong>${t}</strong><span>${d}</span></div>`).join('')}</div>
+  <h3>Gợi ý cấu trúc lưu trữ trên máy / Google Drive</h3><pre>${esc(tree)}</pre>
+  <h3>Mục lục ${LESSONS.length} bài học (bấm vào từng dòng để xem chi tiết)</h3>
+  <div class="tw"><table><thead><tr><th class="w">Bài</th><th>Chủ đề</th><th>Tệp slide</th></tr></thead><tbody>${rows}</tbody></table></div>
+  ${sh.length?`<h3 style="margin-top:28px">Hình ảnh &amp; video chung</h3><div class="media">${sh.join('')}</div>`:''}`;
+}
+
+/* Trang chi tiết từng bài: đủ 4 mục a–d */
+function lessonView(l){
+  const id=l.id,vs=vids(id),p=LESSONS.find(x=>x.id===id-1),n=LESSONS.find(x=>x.id===id+1);
+  const sec=(k,t,b)=>`<section class="blk"><h3><span class="k">${k}</span>${t}</h3>${b}</section>`;
+  const a=l.docs.map(docRow).join('')+(l.docs.some(d=>d.loai==='pdf'||d.loai==='word')?'':E(`[Chèn tài liệu PDF hoặc Word cho Bài ${id}]. Hiện bài này mới có slide gốc.`));
+  const b=(l.images.length?`<div class="media">${l.images.map(imgFig).join('')}</div>`:E(`[Chèn hình ảnh minh họa cho Bài ${id}]`))+'<h4>Video</h4>'+(vs.length?`<div class="media">${vs.map(vidFig).join('')}</div>`:E(`[Chèn video cho Bài ${id}]. Trong VIDEOS, đặt baiHoc: ${id} để video hiện ở đây.`));
+  const c=l.refs.length?l.refs.map(refRow).join(''):E(`[Chèn website, bài viết hoặc nguồn học trực tuyến cho Bài ${id}]`);
+  const d=`<label for="note"><b>Điều em học được</b></label><textarea id="note" placeholder="[Viết ghi chú cá nhân cho Bài ${id}: tóm tắt, khái niệm quan trọng, nhận xét, suy ngẫm...]">${esc(note(l))}</textarea><div class="acts" style="margin-top:10px"><button type="button" class="btn" id="luu">Lưu ghi chú</button><button type="button" class="btn g" id="reset">Khôi phục ghi chú ban đầu</button></div><p class="hint">Ghi chú được lưu trong trình duyệt này. Muốn thay đổi vĩnh viễn, hãy sửa trường note của bài trong mã nguồn.</p>`;
+  return `<div class="ch"><span class="bdg">Bài học ${pad(id)}</span><h2>${esc(l.tieuDe)}</h2><p style="margin:8px 0 0;color:var(--mut)">${esc(l.moTa)}</p><ul class="tp">${l.topics.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`
+   +sec('a','Tệp tin',a)+sec('b','Hình ảnh / Video',b)+sec('c','Link tham chiếu',c)+sec('d','Ghi chú cá nhân',d)
+   +`<div class="pn">${p?`<button type="button" class="btn g" data-go="${p.id}">← Bài ${pad(p.id)}</button>`:'<button type="button" class="btn g" data-go="0">← Mục lục</button>'}${n?`<button type="button" class="btn g" data-go="${n.id}">Bài ${pad(n.id)} →</button>`:'<button type="button" class="btn g" data-go="0">Mục lục →</button>'}</div>`;
+}
+
+/* Điều hướng, tìm kiếm */
+let cur=0,q='';
+const hit=l=>!q||[l.tieuDe,l.moTa,...l.topics,...l.docs.map(d=>d.ten),...l.refs.map(r=>r.ten+' '+(r.mota||'')),...vids(l.id).map(v=>v.ten),note(l),'bài học '+pad(l.id)].join(' ').toLowerCase().includes(q);
+function render(){
+  const m=location.hash.match(/^#\/bai\/([1-8])$/);cur=m?+m[1]:0;
+  const list=LESSONS.filter(hit);
+  $('#nav').innerHTML=`<li><a href="#/" class="${cur===0?'on':''}"><b>Mục lục</b><span>Tổng quan &amp; Mục lục</span></a></li>`+LESSONS.filter(l=>hit(l)||l.id===cur).map(l=>`<li><a href="#/bai/${l.id}" class="${l.id===cur?'on':''}"${l.id===cur?' aria-current="page"':''}><b>Bài ${pad(l.id)}</b><span>${esc(l.tieuDe)}</span></a></li>`).join('');
+  $('#kq').textContent=q?`Tìm thấy ${list.length}/${LESSONS.length} bài học`:`Hiển thị toàn bộ ${LESSONS.length} bài học`;
+  $('#ct').innerHTML=cur?lessonView(LESSONS.find(x=>x.id===cur)):overview(list);
+}
+const go=n=>{location.hash=n?'#/bai/'+n:'#/';scrollTo(0,0)};
+function show(kind,src){$('#mb').innerHTML=kind==='pdf'?`<iframe src="${src}" title="Xem tài liệu PDF"></iframe>`:`<img src="${src}" alt="Xem ảnh phóng to">`;$('#modal').classList.add('on');$('#mClose').focus()}
+const dong=()=>{$('#modal').classList.remove('on');$('#mb').innerHTML=''};
+
+document.addEventListener('click',e=>{
+  const t=e.target,g=t.closest('[data-go]');
+  if(g)return go(+g.dataset.go);
+  if(t.closest('#editBtn')){const b=$('#editBtn'),o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);$('#editBox').hidden=!o;F.forEach(k=>$('#f-'+k).value=info[k]);return}
+  if(t.id==='saveInfo'){F.forEach(k=>info[k]=$('#f-'+k).value.trim()||info[k]);try{localStorage.setItem(IK,JSON.stringify(info))}catch(err){}renderInfo();$('#editBox').hidden=true;$('#editBtn').setAttribute('aria-expanded','false');toast('Đã lưu thông tin.');return}
+  if(t.dataset.pdf)return show('pdf',t.dataset.pdf);
+  if(t.dataset.img)return show('img',t.dataset.img);
+  if(t.id==='mClose'||t.id==='modal')return dong();
+  if(t.id==='luu'){try{localStorage.setItem('cntt40_note_'+cur,$('#note').value);toast('Đã lưu ghi chú.')}catch(err){toast('Không thể lưu ghi chú trên trình duyệt này.')}}
+  if(t.id==='reset'){try{localStorage.removeItem('cntt40_note_'+cur)}catch(err){}$('#note').value=LESSONS.find(x=>x.id===cur).note;toast('Đã khôi phục ghi chú ban đầu.')}
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')dong();
+  if(e.key==='Enter'&&e.target.matches('tr[data-go]'))go(+e.target.dataset.go);
+});
+$('#q').addEventListener('input',e=>{q=e.target.value.trim().toLowerCase();if(cur)location.hash='#/';else render()});
+addEventListener('hashchange',render);
+renderInfo();render();
+</script>
+</body></html>
